@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"go-chat/core"
 	"go-chat/global"
 	"go-chat/model"
@@ -35,4 +36,9 @@ func main() {
 
 	// Delete - delete product
 	db.Delete(&user, 1)
+
+	res := model.UserBasic{}
+	db.Find(&res)
+	fmt.Println("res:", res)
+
 }

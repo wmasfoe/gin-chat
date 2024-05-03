@@ -16,10 +16,13 @@ func InitRouter() *gin.Engine {
 	r := gin.Default()
 	r.GET("/swagger/*any", gs.WrapHandler(swaggerFiles.Handler))
 
+	// 默认后端接口以 api 开头
 	ApiRouters := RouterGroup{r.Group("api")}
-
+	// /api/user 下的路由
+	userRouters := RouterGroup{ApiRouters.Group("user")}
 	//setting 相关接口
 	ApiRouters.SettingRouter()
+	userRouters.UserRouter()
 
 	return r
 }

@@ -1,6 +1,7 @@
 package model
 
 import (
+	"go-chat/global"
 	"gorm.io/gorm"
 )
 
@@ -21,4 +22,17 @@ type UserBasic struct {
 
 func (table *UserBasic) TableName() string {
 	return "user_basic"
+}
+
+func GetUserList() []*UserBasic {
+	global.Log.Infof("获取用户列表")
+	var res []*UserBasic
+
+	global.DB.Find(&res)
+	return res
+}
+
+func AddUserBasic(user *UserBasic) error {
+	global.DB.Create(user)
+	return nil
 }
