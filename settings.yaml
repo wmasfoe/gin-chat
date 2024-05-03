@@ -1,9 +1,9 @@
 mysql:
   host: 127.0.0.1
   port: 3306
-  db: go_blog
+  db: go_admin
   user: root
-  password: 123456
+  password: 123456789
   log-level: dev
 
 system:
@@ -14,7 +14,7 @@ system:
 
 logger:
   level: info
-  prefix: '[blog-server]'
+  prefix: '[go-admin]'
   director: log
   show-line: true
   log-in-console: true

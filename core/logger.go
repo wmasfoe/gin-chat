@@ -4,7 +4,7 @@ import (
 	"bytes"
 	"fmt"
 	"github.com/sirupsen/logrus"
-	"go-blog-server/global"
+	"go-admin/global"
 	"os"
 	"path"
 )
@@ -60,7 +60,7 @@ func InitLogger() *logrus.Logger {
 	mLog.SetReportCaller(global.CONFIG.Logger.ShowLine) //开启返回函数名和行号
 	mLog.SetFormatter(&LogFormatter{})                  //设置自己定义的Formatter
 
-	//解析 setting.yaml 的配置
+	//解析 settings.yaml 的配置
 	level, err := logrus.ParseLevel(global.CONFIG.Logger.Level)
 	if err != nil {
 		//设置最低的Level

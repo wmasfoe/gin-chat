@@ -1,6 +1,6 @@
 package controller
 
-import "go-blog-server/controller/setting"
+import "go-admin/controller/setting"
 
 type Controllers struct {
 	SettingsController setting.SettingsController

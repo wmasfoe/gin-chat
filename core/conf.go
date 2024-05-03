@@ -2,16 +2,16 @@ package core
 
 import (
 	"github.com/sirupsen/logrus"
-	"go-blog-server/config"
-	"go-blog-server/global"
+	"go-admin/config"
+	"go-admin/global"
 	"gopkg.in/yaml.v3"
 	"log"
 	"os"
 )
 
-// 读取 setting.yaml 的数据
+// 读取 settings.yaml 的数据
 func InitConf() {
-	const ConfigFile = "setting.yaml"
+	const ConfigFile = "settings.yaml"
 	c := &config.Config{}
 	yamlConf, err := os.ReadFile(ConfigFile)
 	if err != nil {

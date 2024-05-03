@@ -1,7 +1,7 @@
 package core
 
 import (
-	"go-blog-server/global"
+	"go-admin/global"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 	"gorm.io/gorm/logger"

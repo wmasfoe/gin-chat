@@ -1,9 +1,9 @@
 package main
 
 import (
-	"go-blog-server/core"
-	"go-blog-server/global"
-	"go-blog-server/routers"
+	"go-admin/core"
+	"go-admin/global"
+	"go-admin/routers"
 )
 
 func main() {
@@ -13,6 +13,6 @@ func main() {
 	router := routers.InitRouter()
 
 	listenAddr := global.CONFIG.System.Addr()
-	global.Log.Infof("go-blog-server 程序启动：%s", listenAddr)
+	global.Log.Infof("go-admin 程序启动：%s", listenAddr)
 	router.Run(listenAddr)
 }

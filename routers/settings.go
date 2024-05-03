@@ -1,7 +1,7 @@
 package routers
 
 import (
-	"go-blog-server/controller"
+	"go-admin/controller"
 )
 
 func (r RouterGroup) SettingRouter() {
