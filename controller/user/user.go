@@ -11,11 +11,25 @@ import (
 type UsersController struct {
 }
 
+// UserList
+// @Summary 获取所有用户列表
+// @Tags 用户
+// @Accept application/json
+// @Success 200 {string} json{"code", "msg", "data"}
+// @Router /api/user/list [get]
 func (u UsersController) UserList(c *gin.Context) {
 	res := services.UserService.GetUserList()
 	respModel.SuccessWithData(res, c)
 }
 
+// UserAdd
+// @Summary 新建用户接口
+// @Tags 用户
+// @Accept application/json
+// @Param Name query string true "用户名"
+// @Param Password query string true "密码"
+// @Success 200 {string} json{"code", "msg", "data"}
+// @Router /api/user [post]
 func (u UsersController) UserAdd(c *gin.Context) {
 	tmpUser := model.UserBasic{}
 	err := c.ShouldBindJSON(&tmpUser)
