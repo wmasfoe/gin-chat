@@ -2,7 +2,7 @@ package config
 
 type Mysql struct {
 	Host     string `yaml:"host"`
-	Port     int    `yaml:"port"`
+	Port     string `yaml:"port"`
 	Db       string `yaml:"db"`
 	User     string `yaml:"user"`
 	Password string `yaml:"password"`
@@ -11,5 +11,5 @@ type Mysql struct {
 }
 
 func (m Mysql) Dsn() string {
-	return m.User + ":" + m.Password + "@tcp(" + m.Host + ")/" + m.Db + m.Config
+	return m.User + ":" + m.Password + "@tcp(" + m.Host + ":" + m.Port + ")/" + m.Db + m.Config
 }
