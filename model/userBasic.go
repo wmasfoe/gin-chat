@@ -1,10 +1,10 @@
 package model
 
 import (
-	"go-chat/global"
 	"gorm.io/gorm"
 )
 
+// TODO @dev 这里只对数据库的表结构进行抽象，建议其他逻辑在对应 services 处理
 type UserBasic struct {
 	gorm.Model
 	Identity   string
@@ -18,21 +18,4 @@ type UserBasic struct {
 	LogoutTime string // 下线的时间
 	IsLogout   bool
 	DeviceInfo string
-}
-
-func (table *UserBasic) TableName() string {
-	return "user_basic"
-}
-
-func GetUserList() []*UserBasic {
-	global.Log.Infof("获取用户列表")
-	var res []*UserBasic
-
-	global.DB.Find(&res)
-	return res
-}
-
-func AddUserBasic(user *UserBasic) error {
-	global.DB.Create(user)
-	return nil
 }

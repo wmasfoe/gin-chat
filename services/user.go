@@ -8,6 +8,8 @@ import (
 type UserServices struct{}
 
 func (u UserServices) GetUserList() []*model.UserBasic {
+
+	// TODO @dev service 常对数据库进行crud操作
 	global.Log.Infof("获取用户列表")
 	var res []*model.UserBasic
 
