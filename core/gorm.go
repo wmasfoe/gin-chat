@@ -1,7 +1,7 @@
 package core
 
 import (
-	"go-admin/global"
+	"go-chat/global"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 	"gorm.io/gorm/logger"

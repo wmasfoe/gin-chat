@@ -4,7 +4,7 @@ import (
 	"github.com/gin-gonic/gin"
 	swaggerFiles "github.com/swaggo/files"
 	gs "github.com/swaggo/gin-swagger"
-	"go-admin/global"
+	"go-chat/global"
 )
 
 type RouterGroup struct {

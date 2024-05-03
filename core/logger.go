@@ -4,7 +4,7 @@ import (
 	"bytes"
 	"fmt"
 	"github.com/sirupsen/logrus"
-	"go-admin/global"
+	"go-chat/global"
 	"os"
 	"path"
 )

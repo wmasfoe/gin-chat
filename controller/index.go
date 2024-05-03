@@ -1,6 +1,6 @@
 package controller
 
-import "go-admin/controller/setting"
+import "go-chat/controller/setting"
 
 type Controllers struct {
 	SettingsController setting.SettingsController

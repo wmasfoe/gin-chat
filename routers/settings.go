@@ -1,7 +1,7 @@
 package routers
 
 import (
-	"go-admin/controller"
+	"go-chat/controller"
 )
 
 func (r RouterGroup) SettingRouter() {

@@ -2,7 +2,7 @@ package setting
 
 import (
 	"github.com/gin-gonic/gin"
-	"go-admin/model/respModel"
+	"go-chat/model/respModel"
 )
 
 type SettingsController struct {

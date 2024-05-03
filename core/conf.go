@@ -2,8 +2,8 @@ package core
 
 import (
 	"github.com/sirupsen/logrus"
-	"go-admin/config"
-	"go-admin/global"
+	"go-chat/config"
+	"go-chat/global"
 	"gopkg.in/yaml.v3"
 	"log"
 	"os"
