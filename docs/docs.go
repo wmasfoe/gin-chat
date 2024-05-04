@@ -16,6 +16,23 @@ const docTemplate = `{
     "basePath": "{{.BasePath}}",
     "paths": {
         "/api/user": {
+            "get": {
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "用户"
+                ],
+                "summary": "获取所有用户列表",
+                "responses": {
+                    "200": {
+                        "description": "code\", \"msg\", \"data\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
             "post": {
                 "consumes": [
                     "application/json"
@@ -50,7 +67,7 @@ const docTemplate = `{
                 }
             }
         },
-        "/api/user/list": {
+        "/api/user/:id": {
             "get": {
                 "consumes": [
                     "application/json"
@@ -58,7 +75,24 @@ const docTemplate = `{
                 "tags": [
                     "用户"
                 ],
-                "summary": "获取所有用户列表",
+                "summary": "用户详情",
+                "responses": {
+                    "200": {
+                        "description": "code\", \"msg\", \"data\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "用户"
+                ],
+                "summary": "删除用户",
                 "responses": {
                     "200": {
                         "description": "code\", \"msg\", \"data\"}",

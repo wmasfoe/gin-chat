@@ -16,7 +16,7 @@ type UsersController struct {
 // @Tags 用户
 // @Accept application/json
 // @Success 200 {string} json{"code", "msg", "data"}
-// @Router /api/user/list [get]
+// @Router /api/user [get]
 func (u UsersController) UserList(c *gin.Context) {
 	res := services.UserService.GetUserList()
 	respModel.SuccessWithData(res, c)
@@ -31,14 +31,56 @@ func (u UsersController) UserList(c *gin.Context) {
 // @Success 200 {string} json{"code", "msg", "data"}
 // @Router /api/user [post]
 func (u UsersController) UserAdd(c *gin.Context) {
-	tmpUser := model.UserBasic{}
-	err := c.ShouldBindJSON(&tmpUser)
-	if err != nil {
-		global.Log.Errorf("add user Error: %v", err.Error())
-		respModel.FailWithMsg("新建用户发生异常", c)
-	}
 
+	defer func() {
+		if err := recover(); err != nil {
+			global.Log.Errorf("add user Error: %v", err)
+			respModel.FailWithMsg("新建用户发生异常", c)
+		}
+	}()
+
+	tmpUser := model.UserBasic{}
+	c.ShouldBindJSON(&tmpUser)
 	services.UserService.AddUser(&tmpUser)
 
 	respModel.SuccessWithMsg("新建用户成功", c)
+}
+
+// UserDel
+// @Summary 删除用户
+// @Tags 用户
+// @Accept application/json
+// @Success 200 {string} json{"code", "msg", "data"}
+// @Router /api/user/:id [delete]
+func (u UsersController) UserDel(c *gin.Context) {
+	userID := c.Param("id")
+	err := services.UserService.DeleteUser(userID)
+
+	if err != nil {
+		global.Log.Errorf("add user Error: %v", err.Error())
+		respModel.FailWithMsg("删除用户发生异常", c)
+	}
+
+	respModel.SuccessWithMsg("删除用户成功", c)
+}
+
+// UserDesc
+// @Summary 用户详情
+// @Tags 用户
+// @Accept application/json
+// @Success 200 {string} json{"code", "msg", "data"}
+// @Router /api/user/:id [get]
+func (u UsersController) UserDesc(c *gin.Context) {
+
+	defer func() {
+		if err := recover(); err != nil {
+			global.Log.Errorf("user desc Error: %v", err)
+			respModel.FailWithMsg("获取用户详情失败", c)
+		}
+	}()
+
+	userID := c.Param("id")
+	userDesc, _ := services.UserService.UserDesc(userID)
+
+	respModel.SuccessWithData(userDesc, c)
 }

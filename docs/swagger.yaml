@@ -2,6 +2,17 @@ info:
   contact: {}
 paths:
   /api/user:
+    get:
+      consumes:
+      - application/json
+      responses:
+        "200":
+          description: code", "msg", "data"}
+          schema:
+            type: string
+      summary: 获取所有用户列表
+      tags:
+      - 用户
     post:
       consumes:
       - application/json
@@ -24,7 +35,18 @@ paths:
       summary: 新建用户接口
       tags:
       - 用户
-  /api/user/list:
+  /api/user/:id:
+    delete:
+      consumes:
+      - application/json
+      responses:
+        "200":
+          description: code", "msg", "data"}
+          schema:
+            type: string
+      summary: 删除用户
+      tags:
+      - 用户
     get:
       consumes:
       - application/json
@@ -33,7 +55,7 @@ paths:
           description: code", "msg", "data"}
           schema:
             type: string
-      summary: 获取所有用户列表
+      summary: 用户详情
       tags:
       - 用户
 swagger: "2.0"

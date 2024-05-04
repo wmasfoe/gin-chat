@@ -6,6 +6,8 @@ import (
 
 func (r RouterGroup) UserRouter() {
 	// TODO 示例声明了 /api/user/list 接口
-	r.GET("list", controller.Controller.UserController.UserList)
+	r.GET("", controller.Controller.UserController.UserList)
 	r.POST("", controller.Controller.UserController.UserAdd)
+	r.DELETE("/:id", controller.Controller.UserController.UserDel)
+	r.GET("/:id", controller.Controller.UserController.UserDesc)
 }
