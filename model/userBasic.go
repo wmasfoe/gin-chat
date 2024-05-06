@@ -7,55 +7,29 @@ import (
 // TODO @dev 这里只对数据库的表结构进行抽象，建议其他逻辑在对应 services 处理
 type UserBasic struct {
 	gorm.Model
-	Identity   string `json:"identity"`
-	Name       string `json:"name"`
-	NickName   string `json:"nickName"`
-	Password   string `json:"password"`
-	Phone      string `json:"phone"`
-	Email      string `json:"email"`
-	ClientIp   string `json:"clientIp"`
-	ClientPort string `json:"clientPort"`
-	LoginTime  string `json:"loginTime"`  // 登录的时间
-	LogoutTime string `json:"logoutTime"` // 下线的时间
-	IsLogout   bool   `json:"isLogout"`
-	DeviceInfo string `json:"deviceInfo"`
+	UserBasicDetail
 }
 
-// UserBasicNotPrivate 脱敏的user信息
+// UserBasicNotPrivate 脱敏的user信息，所有人都能看到
 type UserBasicNotPrivate struct {
-	Identity   string `json:"identity"`
-	Name       string `json:"name"`
-	NickName   string `json:"nickName"`
-	Email      string `json:"email"`
-	LoginTime  string `json:"loginTime"`  // 登录的时间
-	LogoutTime string `json:"logoutTime"` // 下线的时间
-	IsLogout   bool   `json:"isLogout"`
+	Identity string `json:"identity" structs:"identity"`
+	Name     string `json:"name" structs:"name"`
+	// TODO 想要更新，这里采用了第一种方法，需要：1.把小驼峰转成下划线命名，或者2.列名称改成小驼峰，因为更新时转成了map，直接用map进行更新了; 或者 3.更新时map再转成userInfo结构体
+	NickName   string `json:"nickName" structs:"nick_name"`
+	Email      string `json:"email" structs:"email"`
+	LoginTime  string `json:"loginTime" structs:"login_time"`   // 登录的时间
+	LogoutTime string `json:"logoutTime" structs:"logout_time"` // 下线的时间
+	IsLogout   bool   `json:"isLogout" structs:"is_logout"`
 }
 
-var UserBasicNotPrivateList = []string{
-	"Identity",
-	"Name",
-	"NickName",
-	"Email",
-	"LoginTime",
-	"LogoutTime",
-	"IsLogout",
-}
-
-// UserBasicDetail user详细信息，没有脱敏
+// UserBasicDetail user详细信息，没有脱敏，可供用户更改的信息
 type UserBasicDetail struct {
-	Identity   string `json:"identity"`
-	Name       string `json:"name"`
-	NickName   string `json:"nickName"`
-	Password   string `json:"password"`
-	Phone      string `json:"phone"`
-	Email      string `json:"email"`
-	ClientIp   string `json:"clientIp"`
-	ClientPort string `json:"clientPort"`
-	LoginTime  string `json:"loginTime"`  // 登录的时间
-	LogoutTime string `json:"logoutTime"` // 下线的时间
-	IsLogout   bool   `json:"isLogout"`
-	DeviceInfo string `json:"deviceInfo"`
+	UserBasicNotPrivate
+	Password   string `json:"password" structs:"password"`
+	Phone      string `json:"phone" structs:"phone"`
+	ClientIp   string `json:"clientIp" structs:"client_ip"`
+	ClientPort string `json:"clientPort" structs:"client_port"`
+	DeviceInfo string `json:"deviceInfo" structs:"device_info"`
 }
 
 func (u UserBasic) TableName() string {

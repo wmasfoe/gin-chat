@@ -84,3 +84,21 @@ func (u UsersController) UserDesc(c *gin.Context) {
 
 	respModel.SuccessWithData(userDesc, c)
 }
+
+func (u UsersController) UserUpdate(c *gin.Context) {
+	defer func() {
+		if err := recover(); err != nil {
+			global.Log.Errorf("user update Error: %v", err)
+			respModel.FailWithMsg("更新用户信息失败", c)
+		}
+	}()
+
+	userID := c.Param("id")
+
+	var tmpUser model.UserBasicNotPrivate
+	c.ShouldBindJSON(&tmpUser)
+
+	services.UserService.UserUpdate(userID, tmpUser)
+
+	respModel.SuccessWithData(map[string]any{}, c)
+}

@@ -1,8 +1,10 @@
 package services
 
 import (
+	"github.com/fatih/structs"
 	"go-chat/global"
 	"go-chat/model"
+	"go-chat/utils"
 )
 
 type UserServices struct{}
@@ -48,6 +50,23 @@ func (u UserServices) UserDesc(userId string) (model.UserBasicDetail, error) {
 		panic(findRes.Error)
 	}
 	return res, nil
+}
+
+func (u UserServices) UserUpdate(userId string, updateInfo model.UserBasicNotPrivate) error {
+	updateInfoMap := structs.Map(&updateInfo)
+
+	resMap := map[string]interface{}{}
+
+	for k, v := range updateInfoMap {
+
+		if !utils.IsEmpty(v) {
+			resMap[k] = v
+		}
+	}
+
+	global.DB.Model(&model.UserBasic{}).Where("Identity = ?", userId).Updates(&resMap)
+
+	return nil
 }
 
 var UserService = new(UserServices)

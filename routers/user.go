@@ -10,4 +10,5 @@ func (r RouterGroup) UserRouter() {
 	r.POST("", controller.Controller.UserController.UserAdd)
 	r.DELETE("/:id", controller.Controller.UserController.UserDel)
 	r.GET("/:id", controller.Controller.UserController.UserDesc)
+	r.PUT("/:id", controller.Controller.UserController.UserUpdate)
 }
