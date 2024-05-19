@@ -1,7 +1,9 @@
 package model
 
 import (
+	"errors"
 	"github.com/asaskevich/govalidator"
+	"go-chat/global"
 	"gorm.io/gorm"
 )
 
@@ -37,8 +39,44 @@ func (u UserBasic) TableName() string {
 	return "user_basic"
 }
 
+func (u UserBasicDetail) findDataByName() (bool, error) {
+	res := global.DB.Model(&UserBasic{}).Where("name = ?", u.Name).First(&u)
+	hasValue := false
+	if res != nil {
+		hasValue = true
+	}
+	return hasValue, nil
+}
+func (u UserBasicDetail) findDataByPhone() (bool, error) {
+	res := global.DB.Model(&UserBasic{}).Where("phone = ?", u.Phone).First(&u)
+	hasValue := false
+	if res != nil {
+		hasValue = true
+	}
+	return hasValue, nil
+}
+func (u UserBasicDetail) findDataByEmail() (bool, error) {
+	res := global.DB.Model(&UserBasic{}).Where("email = ?", u.Email).First(&u)
+	hasValue := false
+	if res != nil {
+		hasValue = true
+	}
+	return hasValue, nil
+}
+
 func (u UserBasicDetail) ValidateData() (bool, error) {
 	// 校验结构体
 	structRes, structErr := govalidator.ValidateStruct(&u)
-	return structRes, structErr
+	// 校验数据是否重复
+	nameRepeat, _ := u.findDataByName()
+	phoneRepeat, _ := u.findDataByPhone()
+	emailRepeat, _ := u.findDataByEmail()
+
+	res := structRes || nameRepeat || phoneRepeat || emailRepeat
+	e := structErr
+	if nameRepeat || phoneRepeat || emailRepeat {
+		e = errors.New("用户信息已存在")
+	}
+
+	return res, e
 }
