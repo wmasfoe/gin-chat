@@ -35,12 +35,23 @@ func (u UsersController) UserAdd(c *gin.Context) {
 	defer func() {
 		if err := recover(); err != nil {
 			global.Log.Errorf("add user Error: %v", err)
-			respModel.FailWithMsg("新建用户发生异常", c)
+			r, ok := err.(string)
+			if ok {
+				respModel.FailWithMsg(r, c)
+			} else {
+				respModel.FailWithMsg("新建用户发生异常", c)
+			}
 		}
 	}()
 
 	tmpUser := model.UserBasic{}
 	c.ShouldBindJSON(&tmpUser)
+
+	_, err := tmpUser.ValidateData()
+	if err != nil {
+		panic(err.Error())
+	}
+
 	services.UserService.AddUser(&tmpUser)
 
 	respModel.SuccessWithMsg("新建用户成功", c)
@@ -99,14 +110,25 @@ func (u UsersController) UserUpdate(c *gin.Context) {
 	defer func() {
 		if err := recover(); err != nil {
 			global.Log.Errorf("user update Error: %v", err)
-			respModel.FailWithMsg("更新用户信息失败", c)
+
+			r, ok := err.(string)
+			if ok {
+				respModel.FailWithMsg(r, c)
+			} else {
+				respModel.FailWithMsg("更新用户信息失败", c)
+			}
 		}
 	}()
 
 	userID := c.Param("id")
 
-	var tmpUser model.UserBasicNotPrivate
+	var tmpUser model.UserBasicDetail
 	c.ShouldBindJSON(&tmpUser)
+
+	_, err := tmpUser.ValidateData()
+	if err != nil {
+		panic(err.Error())
+	}
 
 	services.UserService.UserUpdate(userID, tmpUser)
 

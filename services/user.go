@@ -52,7 +52,7 @@ func (u UserServices) UserDesc(userId string) (model.UserBasicDetail, error) {
 	return res, nil
 }
 
-func (u UserServices) UserUpdate(userId string, updateInfo model.UserBasicNotPrivate) error {
+func (u UserServices) UserUpdate(userId string, updateInfo model.UserBasicDetail) error {
 	updateInfoMap := structs.Map(&updateInfo)
 
 	resMap := map[string]interface{}{}
