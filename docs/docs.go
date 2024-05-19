@@ -85,6 +85,23 @@ const docTemplate = `{
                     }
                 }
             },
+            "put": {
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "用户"
+                ],
+                "summary": "更新用户信息",
+                "responses": {
+                    "200": {
+                        "description": "code\", \"msg\", \"data\"}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
             "delete": {
                 "consumes": [
                     "application/json"

@@ -85,6 +85,16 @@ func (u UsersController) UserDesc(c *gin.Context) {
 	respModel.SuccessWithData(userDesc, c)
 }
 
+// UserUpdate
+// @Summary 更新用户信息
+// @Tags 用户
+// @Accept application/json
+// @Params name query string false "用户名"
+// @Params passWord query string false "密码"
+// @Params NickName query string false "昵称"
+// @Params Email query string false "邮箱"
+// @Success 200 {string} json{"code", "msg", "data"}
+// @Router /api/user/:id [put]
 func (u UsersController) UserUpdate(c *gin.Context) {
 	defer func() {
 		if err := recover(); err != nil {

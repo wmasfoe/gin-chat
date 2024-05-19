@@ -58,4 +58,15 @@ paths:
       summary: 用户详情
       tags:
       - 用户
+    put:
+      consumes:
+      - application/json
+      responses:
+        "200":
+          description: code", "msg", "data"}
+          schema:
+            type: string
+      summary: 更新用户信息
+      tags:
+      - 用户
 swagger: "2.0"
